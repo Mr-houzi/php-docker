@@ -24,6 +24,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
   && docker-php-ext-install bcmath \
   && docker-php-ext-install sockets \
   && docker-php-ext-install zip \
+  && docker-php-ext-install pcntl \
   && docker-php-ext-install sysvmsg
 
 # 安装 Composer
