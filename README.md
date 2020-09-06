@@ -30,7 +30,7 @@ docker-build
 
 ### 配置
 
-1 .复制 env-example 文件重命名为 .env，并填写所需配置。
+1. 复制 env-example 文件重命名为 .env，并填写所需配置。
 
 2. 连接 mysql 时，host 应为 mysql-db，而不是 localhost 或其他。因为这是 docker-compose.yml 中定义 mysql 服务名。
 
