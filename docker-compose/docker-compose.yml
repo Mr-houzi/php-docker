@@ -1,7 +1,15 @@
 version: "3.8"
 services:
+  workspace:
+    build: ./workspace
+    ports:
+      - "2222:22"
+    networks:
+      - backend
+    restart: always
+
   php-fpm:
-    build: ./php/
+    build: ./php
     ports:
       - "9000:9000"
     links:
@@ -18,7 +26,7 @@ services:
     command: php-fpm
 
   nginx:
-    build: ./nginx/
+    build: ./nginx
     depends_on:
       - php-fpm
     links:
