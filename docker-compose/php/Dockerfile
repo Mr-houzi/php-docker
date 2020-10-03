@@ -1,4 +1,6 @@
-FROM php:7.2.33-fpm
+ARG PHP_VERSION
+
+FROM php:${PHP_VERSION}-fpm
 MAINTAINER mr-houzi "ghosthouzi@foxmail.com"
 
 # 设置时区
@@ -13,12 +15,13 @@ RUN apt-get update --fix-missing && \
     apt-get install -y --no-install-recommends \
         wget \
         rsyslog \
-        libjpeg-dev libpng-dev \
+        libjpeg-dev libpng-dev libwebp-dev \
         libfreetype6-dev \
+        libzip-dev \
         --fix-missing
 
 # 安装PHP扩展
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+RUN docker-php-ext-configure gd --with-webp=/usr/include/ --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd \
   && docker-php-ext-install pdo_mysql \
   && docker-php-ext-install bcmath \
