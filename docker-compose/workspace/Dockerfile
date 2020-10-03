@@ -10,11 +10,28 @@ RUN sed -i s/archive.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list \
     && sed -i s/security.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list \
     && apt-get update && apt-get upgrade
 
-#安装node、npm、cron
-RUN apt-get update && apt-get -y install cron nodejs npm
+# 安装cron
+RUN apt-get update && apt-get -y install cron \
+    curl wget \
+    --fix-missing && \
+    apt-get update
 
-RUN npm config set registry https://registry.npm.taobao.org && \
-    npm install n -g
+# NVM管理node、npm
+ENV NVM_DIR /usr/local/nvm
+ARG NODE_VERSION
+RUN mkdir -p /usr/local/nvm && \
+    curl -o- https://gitee.com/mirrors/nvm/raw/master/install.sh | bash && \
+    . $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+    nvm alias default $NODE_VERSION && \
+    nvm use default
+#    && \
+#    # 更换源
+#    nvm node_mirror https://npm.taobao.org/mirrors/node/ && \
+#    nvm npm_mirror https://npm.taobao.org/mirrors/npm/
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 
 # Copy hello-cron file to the cron.d directory
 COPY cron /etc/cron.d/cron
