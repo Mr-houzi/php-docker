@@ -1,11 +1,16 @@
 version: "3.8"
 services:
   workspace:
-    build: ./workspace
+    build:
+      context: ./workspace
+      dockerfile: Dockerfile
+      args:
+        NODE_VERSION: ${NODE_VERSION}
     ports:
       - "2222:22"
     volumes:
       - ../www:/data/www:rw
+      - ./workspace/nvm-install.sh:/data/www/nvm-install.sh:rw
     networks:
       - backend
     restart: always
