@@ -4,6 +4,8 @@ services:
     build: ./workspace
     ports:
       - "2222:22"
+    volumes:
+      - ../www:/data/www:rw
     networks:
       - backend
     restart: always
