@@ -9,7 +9,11 @@ services:
     restart: always
 
   php-fpm:
-    build: ./php
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: ${PHP_VERSION}
     ports:
       - "9000:9000"
     links:

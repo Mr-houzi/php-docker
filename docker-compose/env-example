@@ -1,5 +1,8 @@
 # 定义环境变量
 
+# php
+PHP_VERSION=
+
 # mysql
 MYSQL_ROOT_PASSWORD=
 MYSQL_DATABASE=
