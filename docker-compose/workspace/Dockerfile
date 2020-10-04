@@ -22,13 +22,12 @@ ARG NODE_VERSION
 RUN mkdir -p /usr/local/nvm && \
     curl -o- https://gitee.com/mirrors/nvm/raw/master/install.sh | bash && \
     . $NVM_DIR/nvm.sh && \
+#    export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node && \
     nvm install $NODE_VERSION && \
     nvm alias default $NODE_VERSION && \
-    nvm use default
-#    && \
-#    # 更换源
-#    nvm node_mirror https://npm.taobao.org/mirrors/node/ && \
-#    nvm npm_mirror https://npm.taobao.org/mirrors/npm/
+    nvm use default && \
+    # 更换源
+    npm config set registry http://registry.npm.taobao.org
 
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
