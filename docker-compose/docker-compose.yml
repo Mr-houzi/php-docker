@@ -10,7 +10,6 @@ services:
       - "2222:22"
     volumes:
       - ../www:/data/www:rw
-      - ./workspace/nvm-install.sh:/data/www/nvm-install.sh:rw
     networks:
       - backend
     restart: always
