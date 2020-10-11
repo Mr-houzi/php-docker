@@ -45,7 +45,7 @@ RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.ph
 
 # WORKDIR指令用于指定容器的一个目录
 # 容器启动时执行的命令会在该目录下执行
-WORKDIR /data
+WORKDIR /data/www
 
 # 容器内创建 www 用户和组
 RUN useradd -U www

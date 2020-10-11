@@ -48,3 +48,7 @@ RUN touch /var/log/cron.log
 #CMD cron && tail -f /var/log/cron.log
 
 CMD ["cron", "-f"]
+
+# WORKDIR指令用于指定容器的一个目录
+# 容器启动时执行的命令会在该目录下执行
+WORKDIR /data/www
