@@ -52,3 +52,10 @@ CMD ["cron", "-f"]
 # WORKDIR指令用于指定容器的一个目录
 # 容器启动时执行的命令会在该目录下执行
 WORKDIR /data/www
+
+# 容器内创建 www 用户和组
+ARG RUNTIME_USER
+RUN useradd -U ${RUNTIME_USER}
+
+# 指定运行时用户，默认为root，建议设置为普通用户
+USER $RUNTIME_USER

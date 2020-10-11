@@ -48,4 +48,8 @@ RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.ph
 WORKDIR /data/www
 
 # 容器内创建 www 用户和组
-RUN useradd -U www
+ARG RUNTIME_USER
+RUN useradd -U ${RUNTIME_USER}
+
+# 指定运行时用户，默认为root，建议设置为普通用户
+USER ${RUNTIME_USER}
