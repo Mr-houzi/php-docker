@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       args:
         NODE_VERSION: ${NODE_VERSION}
-        RUNTIME_USER: ${RUNTIME_USER}
+        NOTROOT_USER: ${NOTROOT_USER}
     ports:
       - "2222:22"
     volumes:
@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
       args:
         PHP_VERSION: ${PHP_VERSION}
-        RUNTIME_USER: ${RUNTIME_USER}
+        NOTROOT_USER: ${NOTROOT_USER}
     ports:
       - "9000:9000"
     links:
