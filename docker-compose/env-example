@@ -1,7 +1,7 @@
 # 定义环境变量
 
-# 运行时用户，建议设置为普通用户
-RUNTIME_USER=
+# 普通用户
+NOTROOT_USER=
 
 # php
 PHP_VERSION=
