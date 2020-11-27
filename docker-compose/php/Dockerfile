@@ -23,12 +23,14 @@ RUN apt-get update --fix-missing && \
 
 # 安装PHP扩展
 
-# PHP7.4 添加
+## PHP7.4
 #RUN docker-php-ext-configure gd --with-webp=/usr/include/ --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
 #  && docker-php-ext-install -j$(nproc) gd \
 
 # PHP7.2
-RUN docker-php-ext-install pdo_mysql \
+RUN docker-php-ext-configure gd --with-webp-dir=/usr/include/ --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+  && docker-php-ext-install -j$(nproc) gd \
+  && docker-php-ext-install pdo_mysql \
   && docker-php-ext-install mysqli \
   && docker-php-ext-install bcmath \
   && docker-php-ext-install sockets \
