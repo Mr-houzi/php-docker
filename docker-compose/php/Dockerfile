@@ -14,6 +14,7 @@ RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/source
 RUN apt-get update --fix-missing && \
     apt-get install -y --no-install-recommends \
         wget \
+        git \
         rsyslog \
         libjpeg-dev libpng-dev libwebp-dev \
         libfreetype6-dev \
@@ -21,9 +22,14 @@ RUN apt-get update --fix-missing && \
         --fix-missing
 
 # 安装PHP扩展
-RUN docker-php-ext-configure gd --with-webp=/usr/include/ --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
-  && docker-php-ext-install -j$(nproc) gd \
-  && docker-php-ext-install pdo_mysql \
+
+# PHP7.4 添加
+#RUN docker-php-ext-configure gd --with-webp=/usr/include/ --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+#  && docker-php-ext-install -j$(nproc) gd \
+
+# PHP7.2
+RUN docker-php-ext-install pdo_mysql \
+  && docker-php-ext-install mysqli \
   && docker-php-ext-install bcmath \
   && docker-php-ext-install sockets \
   && docker-php-ext-install zip \
