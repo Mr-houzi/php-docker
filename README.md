@@ -3,7 +3,7 @@
 ## 目录结构
 
 ```
-docker-build
+php-docker
 ├── data # 服务的数据目录
 ├── docker-compose # 构建 docker-compose 的目录
 │   ├── docker-compose.yml
@@ -23,8 +23,11 @@ docker-build
 │       └── Dockerfile
 ├── logs # 日志目录
 ├── README.md
-└── www # PHP项目存放目录
+
+docker-www # PHP项目存放目录
 ```
+
+代码目录：在 `php-docker`目录同级上创建 `docker-www`作为项目代码目录
 
 ## 使用
 

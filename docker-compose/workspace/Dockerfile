@@ -58,5 +58,5 @@ ARG NOTROOT_USER
 RUN useradd -U ${NOTROOT_USER} && \
     useradd -U www
 
-# 指定运行时用户
 USER root
+# 指定运行时用户
