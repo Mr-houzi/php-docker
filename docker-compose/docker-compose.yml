@@ -10,7 +10,7 @@ services:
     ports:
       - "2222:22"
     volumes:
-      - ../www:/data/www:rw
+      - ../../docker-www:/data/www:rw
     networks:
       - backend
     restart: always
@@ -28,7 +28,7 @@ services:
       - mysql-db:mysql-db
       - redis-db:redis-db
     volumes:
-      - ../www:/data/www:rw
+      - ../../docker-www:/data/www:rw
       - ./php/php-dev.ini:/usr/local/etc/php/php.ini:ro
       - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
       - ../logs/php-fpm:/var/log/php-fpm:rw
