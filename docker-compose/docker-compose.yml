@@ -66,7 +66,7 @@ services:
     volumes:
       - ../data/mysql:/var/lib/mysql:rw
       - ../logs/mysql:/var/lib/mysql-logs:rw
-      - ./mysql/conf.d:/etc/mysql/conf.d:ro
+      - ./mysql/conf.d:/etc/mysql:rw
     environment:
       MYSQL_ROOT_PASSWORD:
       MYSQL_DATABASE:
