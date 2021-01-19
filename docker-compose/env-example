@@ -14,3 +14,9 @@ MYSQL_PASSWORD=
 
 # node
 NODE_VERSION=
+
+# phpmyadmin
+# 可以连接任意服务器
+PMA_ARBITRARY=1
+PMA_HOST=mysql-db
+PMA_PORT=3306
