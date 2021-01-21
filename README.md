@@ -61,6 +61,15 @@ TODO：未来会把 composer 从 php 容器中移至 workspace。
 
 ### phpmyadmin
 
+#### 访问
+
+- 内部访问 localhost:8080
+- 外部访问 phpmyadmin.docker.com （需绑定hosts）
+
+登录时，若要连接本环境下的 mysql 容器，则`服务器`选项填写为 mysql 的服务名，即为 `mysql-db`。
+
+#### 修改配置
+
 phpmyadmin 容器中自己维护了一个 php 。在使用时，可能会遇到要求改 php.ini 的需求（如：phpmyadmin 根据 php.ini 默认限制了文件上传大小）。
 phpmyadmin 容器中，在 `/usr/local/etc/php` 目录下存在 `php.ini-development` 、`php.ini-production` 。
 若为开发环境，在宿主机上使用 `docker ps`，将 `php.ini-development` 从容器中复制到宿主机，然后进行编辑，编辑完成后，在复制回容器中。
