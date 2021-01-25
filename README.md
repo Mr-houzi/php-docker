@@ -59,6 +59,21 @@ workspace 容器提供了 node、npm 等命令，容器默认以 root 执行，�
 
 TODO：未来会把 composer 从 php 容器中移至 workspace。 
 
+### php
+
+#### php扩展
+
+以 phpredis 为例，若要安装则在环境变量 .env 文件中，将 `INSTALL_EXT_PHPREDIS` 设置为 true 即可。
+
+安装完毕后会将 redis.so 文件下载至 `/usr/local/lib/php/extensions/no-debug-non-zts-20170718`，
+并在容器 `/usr/local/etc/php/conf.d` 目录下生成 `docker-php-ext-redis.ini`，自动引入扩展。
+
+若安装后，使用过程中若需要关闭 phpredis ，则需要将 `docker-php-ext-redis.ini` 中的扩展引入注释掉即可。
+
+```
+;extension=redis
+```
+
 ### phpmyadmin
 
 #### 访问

@@ -21,6 +21,7 @@ services:
       dockerfile: Dockerfile
       args:
         PHP_VERSION: ${PHP_VERSION}
+        INSTALL_EXT_PHPREDIS: ${INSTALL_EXT_PHPREDIS}
         NOTROOT_USER: ${NOTROOT_USER}
     ports:
       - "9000:9000"
