@@ -37,11 +37,16 @@ RUN docker-php-ext-configure gd --with-webp-dir=/usr/include/ --with-freetype-di
   && docker-php-ext-install zip \
   && docker-php-ext-install pcntl \
   && docker-php-ext-install sysvmsg
-  # phpredis
-RUN pear config-set php_ini ${PHP_INI_DIR}/php.ini \
-  && pecl install -o -f redis \
-  && rm -rf /tmp/pear \
-  && docker-php-ext-enable redis
+
+# phpredis
+ARG INSTALL_EXT_PHPREDIS=false
+RUN if [ ${INSTALL_EXT_PHPREDIS} = true ]; \
+    then \
+        pear config-set php_ini ${PHP_INI_DIR}/php.ini \
+      && pecl install -o -f redis \
+      && rm -rf /tmp/pear \
+      && docker-php-ext-enable redis \
+    ; fi
 
 # 安装 Composer
 # 1. 下载安装脚本 － composer-setup.php － 到当前目录。
