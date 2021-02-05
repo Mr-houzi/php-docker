@@ -19,6 +19,7 @@ RUN apt-get update --fix-missing && \
         libjpeg-dev libpng-dev libwebp-dev \
         libfreetype6-dev \
         libzip-dev \
+        libmcrypt-dev \
         --fix-missing
 
 # 安装PHP扩展
@@ -34,18 +35,32 @@ RUN docker-php-ext-configure gd --with-webp-dir=/usr/include/ --with-freetype-di
   && docker-php-ext-install mysqli \
   && docker-php-ext-install bcmath \
   && docker-php-ext-install sockets \
+  && docker-php-ext-configure zip --with-libzip \
   && docker-php-ext-install zip \
   && docker-php-ext-install pcntl \
-  && docker-php-ext-install sysvmsg
+  && docker-php-ext-install sysvmsg \
+  && pear config-set php_ini "${PHP_INI_DIR}/php.ini" \
+  && pecl install -o -f mcrypt \
+  && rm -rf /tmp/pear \
+  && docker-php-ext-enable mcrypt
 
 # phpredis
 ARG INSTALL_EXT_PHPREDIS=false
 RUN if [ ${INSTALL_EXT_PHPREDIS} = true ]; \
     then \
-        pear config-set php_ini ${PHP_INI_DIR}/php.ini \
-      && pecl install -o -f redis \
+      pecl install -o -f redis \
       && rm -rf /tmp/pear \
       && docker-php-ext-enable redis \
+    ; fi
+
+# swoole
+ARG INSTALL_EXT_SWOOLE=false
+RUN if [ ${INSTALL_EXT_SWOOLE} = true ]; \
+    then \
+        pecl install -o -f swoole \
+        && rm -rf /tmp/pear \
+        && docker-php-ext-enable swoole \
+        && php -m | grep -q 'swoole' \
     ; fi
 
 # 安装 Composer

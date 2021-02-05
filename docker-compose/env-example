@@ -8,6 +8,7 @@ PHP_VERSION=
 
 # php 扩展是否启用
 INSTALL_EXT_PHPREDIS=false
+INSTALL_EXT_SWOOLE=false
 
 # mysql
 MYSQL_ROOT_PASSWORD=
