@@ -61,6 +61,28 @@ TODO：未来会把 composer 从 php 容器中移至 workspace。
 
 ### php
 
+进入 php-fpm 容器
+
+```shell
+docker exec -it docker-compose_php-fpm_1 /bin/bash
+```
+
+php.ini 配置文件位于 /usr/local/etc/php/php.ini
+
+修改配置时，建议将其复制到容器外对应的目录进行修改，修改完毕将其再复制回容器。
+
+docker to host，在 docker-compose/php 目录下执行：
+
+```shell
+docker cp docker-compose_php-fpm_1:/usr/local/etc/php/php.ini php.ini
+```
+
+host to docker，在 docker-compose/php 目录下执行：
+
+```shell
+docker cp php.ini docker-compose_php-fpm_1:/usr/local/etc/php/php.ini
+```
+
 #### php扩展
 
 以 phpredis 为例，若要安装则在环境变量 .env 文件中，将 `INSTALL_EXT_PHPREDIS` 设置为 true 即可。
