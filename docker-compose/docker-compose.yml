@@ -22,6 +22,7 @@ services:
       args:
         PHP_VERSION: ${PHP_VERSION}
         INSTALL_EXT_PHPREDIS: ${INSTALL_EXT_PHPREDIS}
+        INSTALL_EXT_SWOOLE: ${INSTALL_EXT_SWOOLE}
         NOTROOT_USER: ${NOTROOT_USER}
     ports:
       - "9000:9000"
@@ -30,7 +31,6 @@ services:
       - redis-db:redis-db
     volumes:
       - ../../docker-www:/data/www:rw
-      - ./php/php-dev.ini:/usr/local/etc/php/php.ini:rw
       - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
       - ../logs/php-fpm:/var/log/php-fpm:rw
     networks:
