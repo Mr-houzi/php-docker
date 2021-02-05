@@ -39,6 +39,8 @@ RUN docker-php-ext-configure gd --with-webp-dir=/usr/include/ --with-freetype-di
   && docker-php-ext-install zip \
   && docker-php-ext-install pcntl \
   && docker-php-ext-install sysvmsg \
+  # 复制配置
+  && cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
   && pear config-set php_ini "${PHP_INI_DIR}/php.ini" \
   && pecl install -o -f mcrypt \
   && rm -rf /tmp/pear \
