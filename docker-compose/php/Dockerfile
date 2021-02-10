@@ -78,6 +78,10 @@ RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.ph
     mv composer.phar /usr/local/bin/composer && \
     /usr/local/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
+# 安装 ffmpeg
+RUN apt-get update
+RUN apt-get -y install ffmpeg
+
 # WORKDIR指令用于指定容器的一个目录
 # 容器启动时执行的命令会在该目录下执行
 WORKDIR /data/www
