@@ -3,23 +3,24 @@
 # 普通用户
 NOTROOT_USER=
 
-# php
+# ====== php ======
 PHP_VERSION=
 
 # php 扩展是否启用
 INSTALL_EXT_PHPREDIS=false
 INSTALL_EXT_SWOOLE=false
 
-# mysql
+# ====== mysql ======
 MYSQL_ROOT_PASSWORD=
 MYSQL_DATABASE=
 MYSQL_USER=
 MYSQL_PASSWORD=
 
-# node
+# ====== node ======
+# 大版本 如（10，12，14）
 NODE_VERSION=
 
-# phpmyadmin
+# ====== phpmyadmin ======
 # 可以连接任意服务器
 PMA_ARBITRARY=1
 PMA_HOST=mysql-db
