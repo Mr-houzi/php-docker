@@ -18,7 +18,7 @@ services:
   php-fpm:
     build:
       context: ./php
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile${PHP_VERSION}
       args:
         PHP_VERSION: ${PHP_VERSION}
         INSTALL_EXT_PHPREDIS: ${INSTALL_EXT_PHPREDIS}
