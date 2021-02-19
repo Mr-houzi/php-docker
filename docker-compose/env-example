@@ -4,6 +4,7 @@
 NOTROOT_USER=
 
 # ====== php ======
+# 版本 eg: 7.2 写作72
 PHP_VERSION=
 
 # php 扩展是否启用

@@ -55,11 +55,14 @@ docker-compose 须在 docker-build/docker-compose 目录下执行
     
 ### workspace
 
-workspace 容器提供了 node、npm 等命令，容器默认以 root 执行，提供了 www 和 自定义（NOTROOT——USER）用户和组，可通过 su www 切换。
+workspace 容器提供了 node、npm、yarn 等命令，容器默认以 root 执行，提供了 www 和 自定义（NOTROOT——USER）用户和组，可通过 su www 切换。
 
 TODO：未来会把 composer 从 php 容器中移至 workspace。 
 
 ### php
+
+- 7.2 稳定版
+- 7.4 测试中
 
 进入 php-fpm 容器
 
