@@ -116,3 +116,17 @@ phpmyadmin 容器中，在 `/usr/local/etc/php` 目录下存在 `php.ini-develop
 **在宿主机中，复制 `php.ini-development` 并重命名为 `php.ini`，重启容器生效**。
 
 PS:建议将 `php.ini-development` 复制到 phpmyadmin/conf 下进行修改，此目录会被忽略，不会被 git 记录。 
+
+#### 三种连接方式
+
+支持三种方式
+
+- 连接任意数据库服务器
+- 连接单个数据库服务器
+- 连接多个数据库服务器（可切换）
+
+连接任意数据库服务器， 将环境变量 `PMA_ARBITRARY` 设置为 1；
+
+连接单个数据库服务器， 将环境变量 `PMA_ARBITRARY` 设置为 0，配置 PMA_HOST、PMA_VERBOSE（数据库服务器别名）、PMA_PORT；
+
+连接多个数据库服务器， 将环境变量 `PMA_ARBITRARY` 设置为 0，PMA_HOST、PMA_VERBOSE、PMA_PORT 需要为空，否则不生效，配置 PMA_HOSTS、PMA_VERBOSES、PMA_PORTS。
