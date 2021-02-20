@@ -85,7 +85,7 @@ services:
     restart: always
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    build: ./phpmyadmin
     networks:
       - backend
       - frontend
@@ -94,7 +94,11 @@ services:
     environment:
       PMA_ARBITRARY:
       PMA_HOST:
-      MYSQL_ROOT_PASSWORD:
+      PMA_VERBOSE:
+      PMA_PORT:
+      PMA_HOSTS:
+      PMA_VERBOSES:
+      PMA_PORTS:
     depends_on:
       - mysql-db
     links:
