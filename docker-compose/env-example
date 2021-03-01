@@ -22,7 +22,14 @@ MYSQL_PASSWORD=
 NODE_VERSION=
 
 # ====== phpmyadmin ======
-# 可以连接任意服务器
-PMA_ARBITRARY=1
-PMA_HOST=mysql-db
-PMA_PORT=3306
+# phpmyadmin
+# 是否能连接任意数据库（0/1 否/是）
+PMA_ARBITRARY=0
+# 连接单个数据库
+PMA_HOST=
+PMA_VERBOSE=
+PMA_PORT=
+# 连接多个数据库
+PMA_HOSTS=mysql-db,test.com
+PMA_VERBOSES=mysql-db,test
+PMA_PORTS=3306,3306
