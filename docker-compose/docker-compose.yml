@@ -22,7 +22,6 @@ services:
       args:
         INSTALL_EXT_PHPREDIS: ${INSTALL_EXT_PHPREDIS}
         INSTALL_EXT_SWOOLE: ${INSTALL_EXT_SWOOLE}
-        NOTROOT_USER: ${NOTROOT_USER}
     ports:
       - "9000:9000"
     links:
