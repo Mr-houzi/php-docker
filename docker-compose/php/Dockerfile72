@@ -76,14 +76,18 @@ RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.ph
 RUN apt-get update
 RUN apt-get -y install ffmpeg
 
+# 配置 php-fpm 默认用户的UID（参考Laradock）
+ARG PUID=1000
+ENV PUID ${PUID}
+ARG PGID=1000
+ENV PGID ${PGID}
+
+RUN groupmod -o -g ${PGID} www-data && \
+    usermod -o -u ${PUID} -g www-data www-data
+
 # WORKDIR指令用于指定容器的一个目录
 # 容器启动时执行的命令会在该目录下执行
 WORKDIR /data/www
-
-# 容器内创建 www、非root 用户和组
-ARG NOTROOT_USER
-RUN useradd -U ${NOTROOT_USER} && \
-    useradd -U www
 
 # 指定运行时用户
 USER root
