@@ -64,10 +64,10 @@ TODO：未来会把 composer 从 php 容器中移至 workspace。
 - 7.2 稳定版
 - 7.4 测试中
 
-进入 php-fpm 容器
+以非root 用户进入容器 
 
 ```shell
-docker exec -it docker-compose_php-fpm_1 /bin/bash
+docker exec -u www-data  -it docker-compose_php-fpm_1 /bin/bash
 ```
 
 php.ini 配置文件位于 /usr/local/etc/php/php.ini
