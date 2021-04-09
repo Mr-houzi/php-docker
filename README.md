@@ -99,6 +99,12 @@ docker cp php.ini docker-compose_php-fpm_1:/usr/local/etc/php/php.ini
 ;extension=redis
 ```
 
+### redis
+
+```shell
+docker exec -it docker-compose_redis-db_1 redis-cli
+```
+
 ### phpmyadmin
 
 #### 访问
