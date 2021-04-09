@@ -130,3 +130,7 @@ PS:建议将 `php.ini-development` 复制到 phpmyadmin/conf 下进行修改，�
 连接单个数据库服务器， 将环境变量 `PMA_ARBITRARY` 设置为 0，配置 PMA_HOST、PMA_VERBOSE（数据库服务器别名）、PMA_PORT；
 
 连接多个数据库服务器， 将环境变量 `PMA_ARBITRARY` 设置为 0，PMA_HOST、PMA_VERBOSE、PMA_PORT 需要为空，否则不生效，配置 PMA_HOSTS、PMA_VERBOSES、PMA_PORTS。
+
+## License
+
+本项目基于 [MIT license](https://opensource.org/licenses/MIT).
