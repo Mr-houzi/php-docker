@@ -3,27 +3,35 @@
 ## 目录结构
 
 ```
-php-docker
-├── data # 服务的数据目录
-├── docker-compose # 构建 docker-compose 的目录
+php-docker/
+├── data
+├── docker-compose
 │   ├── docker-compose.yml
 │   ├── env-example
 │   ├── mysql
 │   │   └── Dockerfile
 │   ├── nginx
 │   │   ├── conf.d
+│   │   │   ├── default.conf
+│   │   │   ├── demo.conf
+│   │   │   └── phpmyadmin.conf
 │   │   ├── Dockerfile
 │   │   └── nginx.conf
 │   ├── php
-│   │   ├── Dockerfile
-│   │   ├── php-dev.ini
-│   │   ├── php-fpm.conf
-│   │   └── php.ini
-│   └── redis
+│   │   ├── conf
+│   │   ├── Dockerfile72
+│   │   ├── Dockerfile74
+│   │   └── php-fpm.conf
+│   ├── phpmyadmin
+│   │   └── Dockerfile
+│   ├── redis
+│   │   └── Dockerfile
+│   └── workspace
+│       ├── cron
 │       └── Dockerfile
-├── logs # 日志目录
-├── README.md
-
+├── LICENSE
+├── logs
+└── README.md
 docker-www # PHP项目存放目录
 ```
 
