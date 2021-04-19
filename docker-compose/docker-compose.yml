@@ -70,7 +70,7 @@ services:
       MYSQL_DATABASE:
       MYSQL_USER:
       MYSQL_PASSWORD:
-      restart:
+      restart: always
       command: "--character-set-server=utf8"
 
   redis-db:
