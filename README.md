@@ -107,6 +107,56 @@ docker cp php.ini docker-compose_php-fpm_1:/usr/local/etc/php/php.ini
 ;extension=redis
 ```
 
+#### 版本切换和多版本PHP并存容器
+
+默认 fpm 容器为 docker-compose.yml 中名为 php-fpm 的服务容器。如果想要切换版本可以在 .env 中修改 PHP_VERSION 值。
+
+如果想要并存的多个版本的PHP容器时，则可以在 docker-compose.yml 复制一份 php-fpm 的配置，并改动如下。
+
+```
+// docker-compose.yml
+……
+  php-fpm74:
+    build:
+      context: ./php
+      dockerfile: Dockerfile74
+      args:
+        INSTALL_EXT_PHPREDIS: ${INSTALL_EXT_PHPREDIS}
+        INSTALL_EXT_SWOOLE: ${INSTALL_EXT_SWOOLE}
+    ports:
+      - "9074:9000"
+    links:
+      - mysql-db:mysql-db
+      - redis-db:redis-db
+    volumes:
+      - ../../docker-www:/data/www:rw
+      - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
+      - ../logs/php-fpm:/var/log/php-fpm:rw
+    networks:
+      - backend
+    restart: always
+    command: php-fpm
+……
+```
+
+主要改动了几点：
+
+1. 服务名不能重名，改为 php-fpm74；
+2. dockerfile 的构建文件改为你想构建的PHP版本，如：Dockerfile74；
+3. 端口号映射（宿主机端口：容器端口），php-fpm74 宿主机端口不能和 php-fpm 端口相同，改为 9074，php-fpm 镜像默认 9000 端口，所以容器端口不用改变。
+
+如果有项目想要用 php7.4，那么 Nginx 代理到 php-fpm74 容器，端口仍为 9000。
+
+```
+location ~ [^/]\.php(/|$)
+    {
+        ……
+        fastcgi_pass php-fpm74:9000;
+        fastcgi_index index.php;
+        ……
+    }
+```
+
 ### redis
 
 ```shell
