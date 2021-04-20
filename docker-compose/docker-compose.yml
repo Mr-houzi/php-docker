@@ -36,12 +36,35 @@ services:
     restart: always
     command: php-fpm
 
+  php-fpm74:
+    build:
+      context: ./php
+      dockerfile: Dockerfile74
+      args:
+        INSTALL_EXT_PHPREDIS: ${INSTALL_EXT_PHPREDIS}
+        INSTALL_EXT_SWOOLE: ${INSTALL_EXT_SWOOLE}
+    ports:
+      - "9074:9000"
+    links:
+      - mysql-db:mysql-db
+      - redis-db:redis-db
+    volumes:
+      - ../../docker-www:/data/www:rw
+      - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
+      - ../logs/php-fpm:/var/log/php-fpm:rw
+    networks:
+      - backend
+    restart: always
+    command: php-fpm
+
   nginx:
     build: ./nginx
     depends_on:
       - php-fpm
+      - php-fpm74
     links:
       - php-fpm:php-fpm
+      - php-fpm74:php-fpm74
     volumes:
       - ../../docker-www:/data/www:rw
       - ./nginx/conf.d:/etc/nginx/conf.d:rw
