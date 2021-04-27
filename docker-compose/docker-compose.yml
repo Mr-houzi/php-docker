@@ -48,6 +48,7 @@ services:
     links:
       - mysql-db:mysql-db
       - redis-db:redis-db
+      - elasticsearch-elk:elasticsearch-elk
     volumes:
       - ../../docker-www:/data/www:rw
       - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
@@ -93,8 +94,8 @@ services:
       MYSQL_DATABASE:
       MYSQL_USER:
       MYSQL_PASSWORD:
-      restart: always
-      command: "--character-set-server=utf8"
+    restart: always
+    command: "--character-set-server=utf8"
 
   redis-db:
     build: ./redis
@@ -126,6 +127,29 @@ services:
     links:
       - mysql-db:mysql
     restart: always
+
+  elasticsearch-elk:
+    build: ./elasticsearch
+    environment:
+      - cluster.name=es-cluster
+      - node.name=es-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - cluster.initial_master_nodes=es-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ../data/elasticsearch:/usr/share/elasticsearch/data:rw
+    networks:
+      - backend
+      - frontend
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    restart: always
+    command: elasticsearch
 
 networks:
   frontend:
