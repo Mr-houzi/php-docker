@@ -140,6 +140,9 @@ services:
       memlock:
         soft: -1
         hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
     volumes:
       - ../data/elasticsearch:/usr/share/elasticsearch/data:rw
     networks:
@@ -150,6 +153,23 @@ services:
       - "9300:9300"
     restart: always
     command: elasticsearch
+
+  kibana-elk:
+    build:
+      context: ./kibana
+      args:
+        ELK_VERSION: ${ELK_VERSION}
+    environment:
+      - ELASTICSEARCH_HOSTS=${ELASTICSEARCH_HOSTS}
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch-elk
+    links:
+      - elasticsearch-elk:elasticsearch-elk
+    networks:
+      - frontend
+      - backend
 
 networks:
   frontend:
