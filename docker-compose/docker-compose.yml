@@ -22,6 +22,8 @@ services:
       args:
         INSTALL_EXT_PHPREDIS: ${INSTALL_EXT_PHPREDIS}
         INSTALL_EXT_SWOOLE: ${INSTALL_EXT_SWOOLE}
+    cap_add:
+      - SYS_PTRACE
     ports:
       - "9000:9000"
     links:
@@ -29,7 +31,7 @@ services:
       - redis-db:redis-db
     volumes:
       - ../../docker-www:/data/www:rw
-      - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
+      - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf:rw
       - ../logs/php-fpm:/var/log/php-fpm:rw
     networks:
       - backend
@@ -43,6 +45,8 @@ services:
       args:
         INSTALL_EXT_PHPREDIS: ${INSTALL_EXT_PHPREDIS}
         INSTALL_EXT_SWOOLE: ${INSTALL_EXT_SWOOLE}
+    cap_add:
+      - SYS_PTRACE
     ports:
       - "9074:9000"
     links:
