@@ -195,6 +195,14 @@ PS:建议将 `php.ini-development` 复制到 phpmyadmin/conf 下进行修改，�
 
 连接多个数据库服务器， 将环境变量 `PMA_ARBITRARY` 设置为 0，PMA_HOST、PMA_VERBOSE、PMA_PORT 需要为空，否则不生效，配置 PMA_HOSTS、PMA_VERBOSES、PMA_PORTS。
 
+### elk
+
+配置 Kibana 连接 Elasticsearch。在 .env 中配置 ELASTICSEARCH_HOSTS ，此值使一个数组，用 es 的服务名称+端口号连接。配置如下：
+
+```
+ELASTICSEARCH_HOSTS=["http://elasticsearch-elk:9200"]
+```
+
 ## License
 
 本项目基于 [MIT license](https://opensource.org/licenses/MIT).

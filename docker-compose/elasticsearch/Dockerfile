@@ -1,5 +1,5 @@
-# FROM elasticsearch:7.12.0
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.12.0
+ARG ELK_VERSION
+FROM docker.elastic.co/elasticsearch/elasticsearch:${ELK_VERSION}
 
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
