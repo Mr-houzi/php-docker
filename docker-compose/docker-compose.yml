@@ -91,7 +91,7 @@ services:
       - "3306:3306"
     volumes:
       - ../data/mysql:/var/lib/mysql:rw
-      - ../logs/mysql:/var/lib/mysql-logs:rw
+      - ../logs/mysql/binlog:/var/lib/mysql/binlog:rw
     environment:
       MYSQL_ROOT_PASSWORD:
       MYSQL_DATABASE:
