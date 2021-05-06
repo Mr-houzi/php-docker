@@ -159,9 +159,7 @@ location ~ [^/]\.php(/|$)
 
 ### mysql
 
-容器内配置目录 /etc/mysql
-
-建议将配置文件（如 my.cnf），通过 docker cp 复制到宿主机的 mysql/conf.d 目录进行修改，改完再复制回去，重启容器即可。
+！！容器内 mysqld 配置位于 /etc/mysql/conf.d/docker.cnf
 
 ### redis
 
