@@ -47,23 +47,6 @@ RUN if [ ${INSTALL_EXT_SWOOLE} = true ]; \
         && php -m | grep -q 'swoole' \
     ; fi
 
-# 安装 Composer
-# 1. 下载安装脚本 － composer-setup.php － 到当前目录。
-# 2. 执行安装过程。
-# 3. 删除安装脚本。
-# 4. 移动命令
-# 5. 切换阿里源
-ENV COMPOSER_HOME /root/Composer
-RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" && \
-    php composer-setup.php && \
-    php -r "unlink('composer-setup.php');" && \
-    mv composer.phar /usr/local/bin/composer && \
-    /usr/local/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-
-# 安装 ffmpeg
-RUN apt-get update
-RUN apt-get -y install ffmpeg
-
 # 配置 php-fpm 默认用户的UID（参考Laradock）
 ARG PUID=1000
 ENV PUID ${PUID}
@@ -72,6 +55,28 @@ ENV PGID ${PGID}
 
 RUN groupmod -o -g ${PGID} www-data && \
     usermod -o -u ${PUID} -g www-data www-data
+
+USER root
+
+# 安装 Composer
+# 1. 下载安装脚本 － composer-setup.php － 到当前目录。
+# 2. 执行安装过程。
+# 3. 删除安装脚本。
+# 4. 移动命令
+# 5. 切换阿里源
+ENV COMPOSER_HOME /data/Composer
+RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');" && \
+    mv composer.phar /usr/local/bin/composer && \
+    /usr/local/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+
+RUN chmod -R 777 ${COMPOSER_HOME} && \
+    chown -R www-data:www-data ${COMPOSER_HOME}
+
+# 安装 ffmpeg
+RUN apt-get update
+RUN apt-get -y install ffmpeg
 
 # WORKDIR指令用于指定容器的一个目录
 # 容器启动时执行的命令会在该目录下执行
