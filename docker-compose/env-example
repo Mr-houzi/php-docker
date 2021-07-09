@@ -35,5 +35,5 @@ PMA_VERBOSES=mysql-db,test
 PMA_PORTS=3306,3306
 
 # ====== elk ======
-ELK_VERSION=
+ELK_VERSION=7.2.0
 ELASTICSEARCH_HOSTS=["http://elasticsearch-elk:9200"]

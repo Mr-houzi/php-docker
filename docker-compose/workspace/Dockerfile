@@ -53,7 +53,7 @@ WORKDIR /data/www
 # 容器内创建 www、非root 用户和组
 ARG NOTROOT_USER
 RUN useradd -U ${NOTROOT_USER} && \
-    useradd -U www
+    useradd -U www-data
 
 USER root
 # 指定运行时用户
