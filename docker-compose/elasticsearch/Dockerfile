@@ -13,4 +13,4 @@ RUN mkdir -p ./plugins/ik \
     && wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${ELK_VERSION}/elasticsearch-analysis-ik-${ELK_VERSION}.zip --no-check-certificate \
     && unzip -o elasticsearch-analysis-ik-${ELK_VERSION}.zip -d ./plugins/ik
 
-EXPOSE 9200 9300
+# EXPOSE 9200 9300
