@@ -1,0 +1,5 @@
+FROM golang
+#WORKDIR $GOPATH/src
+WORKDIR /data/www
+
+EXPOSE 8088
