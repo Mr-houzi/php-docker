@@ -72,6 +72,8 @@ services:
     volumes:
       - ../../docker-www:/data/www:rw
     tty: true
+    networks:
+      - backend
 
   nginx:
     build: ./nginx
