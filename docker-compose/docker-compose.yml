@@ -74,6 +74,7 @@ services:
     tty: true
     networks:
       - backend
+    restart: always
 
   nginx:
     build: ./nginx
