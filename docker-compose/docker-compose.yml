@@ -220,6 +220,12 @@ services:
     networks:
       - backend
     restart: always
+  rabbitmq-mq:
+    build:
+      context: ./rabbitmq
+    networks:
+      - backend
+    restart: always
 networks:
   frontend:
   backend:
