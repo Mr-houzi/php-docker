@@ -1,8 +1,18 @@
 FROM rabbitmq:3.9
 
-# 设置时区
-ENV TZ=Asia/Shanghai
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# =========== 设置时区（ubuntu） ===========
+# 设置时区，不同镜像系统之间，设置时区不同
+# @link https://blog.csdn.net/wxb880114/article/details/113245119#t11
+ENV TZ=Asia/Shanghai \
+    DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+    && apt-get install -y tzdata \
+    && ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime \
+    && echo ${TZ} > /etc/timezone \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
+    && rm -rf /var/lib/apt/lists/*
+# =========== 设置时区（ubuntu） ===========
 
 # 安装图形管理界面插件 UI port 15672
 # 默认用户和密码 guest
