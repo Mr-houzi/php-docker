@@ -7,7 +7,7 @@ ENV TZ=Asia/Shanghai \
     DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get install -y tzdata \
+    && apt-get install -y tzdata wget \
     && ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
     && dpkg-reconfigure --frontend noninteractive tzdata \
@@ -16,6 +16,8 @@ RUN apt-get update \
 
 # 安装图形管理界面插件 UI port 15672
 # 默认用户和密码 guest
-RUN rabbitmq-plugins enable rabbitmq_management
-
-RUN echo management_agent.disable_metrics_collector = false > /etc/rabbitmq/conf.d/management_agent.disable_metrics_collector.conf
+RUN rabbitmq-plugins enable rabbitmq_management \
+    && echo management_agent.disable_metrics_collector = false > /etc/rabbitmq/conf.d/management_agent.disable_metrics_collector.conf \
+# 安装延迟交换机插件(不内置，须先下载)
+    && wget -P /opt/rabbitmq/plugins https://gitee.com/hz-mirror/rabbitmq-delayed-message-exchange/attach_files/955674/download/rabbitmq_delayed_message_exchange-3.9.0.ez \
+    && rabbitmq-plugins enable rabbitmq_delayed_message_exchange
