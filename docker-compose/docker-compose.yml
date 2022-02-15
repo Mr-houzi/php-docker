@@ -220,6 +220,18 @@ services:
     networks:
       - backend
     restart: always
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/conf/prometheus.yml:/etc/prometheus/prometheus.yml:rw
+    networks:
+      - backend
+    restart: always
+  grafana:
+    image: grafana/grafana:latest
+    networks:
+      - backend
+    restart: always
   rabbitmq-mq:
     build:
       context: ./rabbitmq
