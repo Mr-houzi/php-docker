@@ -89,6 +89,7 @@ services:
     build: ./golang
     ports:
       - "8088:8088"
+      - "2345:2345"
     links:
       - "mysql-db"
       - "redis-db"
